@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha seu ajudante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .image-container img {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            width: 200px;
+            height: 350px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.5s;
+        }
+
+        .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: cover;
+        }
+
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            backface-visibility: hidden;
+        }
+
+        .card .front {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card .back {
+            transform: rotateY(180deg);
+            background-color: #2e2e2e;
+            color: white;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card:hover .front {
+            transform: rotateY(180deg);
+        }
+
+        .card:hover .back {
+            transform: rotateY(0deg);
+        }
+
+        .card .back p {
+            font-size: 14px;
+            margin: 0 0 10px 0;
+        }
+
+        .vote-btn {
+            background-color: #7828a7;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .vote-btn:hover {
+            background-color: #1e163d;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .popup button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #c82333;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="https://i.pinimg.com/736x/6d/93/7f/6d937f20d623b9332f321086e2969a09.jpg" alt="Imagem do topo">
+    </div>
+    <div>
+        <h1 id="contador" style="color: #c82333;">Faltam (insira quantidade de dias)</h1> 
+        <h5>Olá, meus queridos telespectadores! Hoje vim pedir uma ajudinha de vocês!</h5>
+        <br>
+        <p style="color: #217088;">Vocês conhecem o famoso "voto majoritário?"</p>
+        <p>Quero que entrem em consenso, e o ajudante mais votado irá com vocês em suas aventuras! Abaixo está apenas a informação sobre quem são os seus patrocinadores!</p>
+        <p>Boa sorte! Estou ansiosa para revê-los!</p>  
+        <p>(Caso precisem de alguma ajuda, mande mensagem para quem te enviou o link deste site!)</p>      
+    </div>
+    <div class="card-container">
+        <!-- Card 1 -->
+        <div class="card" id="card1">
+            <div class="front">
+                <img src="https://cdn.discordapp.com/attachments/1073716308476182620/1313514422412640310/c7e07548841e7ce84e14f8c7e68db306.jpg?ex=67506922&is=674f17a2&hm=e8481fbf26a4e0f703f2288a783a5f88bbee9438e27a49162854f667d449865b&" alt="Imagem do Juiz Demoníaco do Fogo">
+                <div>Patrocinador: Juiz Demoníaco do Fogo</div>
+            </div>
+            <div class="back">
+                <p>Um fogo branco puro que queima qualquer mal encontrado em seu alvo, e que não pode ser apagado.</p>
+                <button class="vote-btn" onclick="votar('Juiz Demoníaco do Fogo')">Votar</button>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" id="card2">
+            <div class="front">
+                <img src="https://media.discordapp.net/attachments/1073716308476182620/1313514422672560201/2a0b0b68fc9d4a980718652e9ce539e9.jpg?ex=67506922&is=674f17a2&hm=11161953d4898012b6b81b6bb4de95d314fe0c0094e625ce47b21a36b49c356b&=&format=webp&width=353&height=353" alt="Imagem do Mestre do Aço">
+                <div>Patrocinador: Mestre do Aço</div>
+            </div>
+            <div class="back">
+                <p>Permite que o usuário exerça uma força imensa em um empurrão.</p>
+                <button class="vote-btn" onclick="votar('Mestre do Aço')">Votar</button>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" id="card3">
+            <div class="front">
+                <img src="https://media.discordapp.net/attachments/1073716308476182620/1313514423062761512/818cdd4a046e34517be50c5f71902fa4.jpg?ex=67506922&is=674f17a2&hm=4c5a876c2cbe4fd8041511aa32e1b033422150cfb080f2a7391d6ac1e6f76e50&=&format=webp&width=282&height=353" alt="Imagem do Rei Demônio da Salvação">
+                <div>Patrocinador: Rei Demônio da Salvação</div>
+            </div>
+            <div class="back">
+                <p>Uma habilidade que de alguma forma foi passada de patrocinador para Encarnação. Permite ao usuário controlar e domar seres.</p>
+                <button class="vote-btn" onclick="votar('Rei Demônio da Salvação')">Votar</button>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card" id="card4">
+            <div class="front">
+                <img src="https://media.discordapp.net/attachments/1073716308476182620/1313514424061001788/32b588a503cdc56d070ce258166e3658.jpg?ex=67506922&is=674f17a2&hm=4b069e302b5f6fadb2ade67927ec3b359a8ff7b49e899a5d7c2004a7c3ef3c1d&=&format=webp&width=249&height=353" alt="Imagem do Senhor do Abismo">
+                <div>Patrocinador: Senhor do Abismo</div>
+            </div>
+            <div class="back">
+                <p>Uma habilidade que de alguma forma foi passada de patrocinador para Encarnação. Permite ao usuário controlar e comunicar com insetos.</p>
+                <button class="vote-btn" onclick="votar('Senhor do Abismo')">Votar</button>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card" id="card5">
+            <div class="front">
+                <img src="https://media.discordapp.net/attachments/1073716308476182620/1313514424354607175/b34e4188a850bfb07e3a495191b5fbd3.jpg?ex=67506922&is=674f17a2&hm=539411e4b0c63321145204c3401c264b5b3b4b04891d83b1e1ca318e9accea35&=&format=webp&width=269&height=353" alt="Imagem do Deus da Guerra Marítima">
+                <div>Patrocinador: Deus da Guerra Marítima</div>
+            </div>
+            <div class="back">
+                <p>Conjura doze navios fantasmas quando perto de um corpo de água e permite que seu usuário os comande em batalha.</p>
+                <button class="vote-btn" onclick="votar('Deus da Guerra Marítima')">Votar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <p id="popup-message"></p>
+        <button onclick="fecharPopup()">Fechar</button>
+    </div>
+
+    <script>
+        function votar(patrocinador) {
+            const popup = document.getElementById('popup');
+            const popupMessage = document.getElementById('popup-message');
+            popupMessage.innerHTML = `Olha só! Parece que você acabou de escolher o <strong>${patrocinador}</strong>. Com isso, por favor, copie essa mensagem abaixo e mande para o superior que mandou o link deste site:<br><br>Olá, NL. Acabo de votar em: <strong>${patrocinador}</strong>.`;
+            popup.style.display = 'block';
+        }
+
+        function fecharPopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+        }
+        function atualizarContador() {
+            // Data final (5 de janeiro de 2025)
+            const dataFinal = new Date("January 5, 2025 00:00:00").getTime();
+
+            // Data atual
+            const dataAtual = new Date().getTime();
+
+            // Calcular a diferença em milissegundos
+            const diferenca = dataFinal - dataAtual;
+
+            // Calcular a quantidade de dias restantes
+            const diasRestantes = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+
+            // Atualizar o conteúdo do elemento com o número de dias restantes
+            document.getElementById("contador").innerText = `Faltam ${diasRestantes} dias`;
+        }
+
+        // Atualizar o contador assim que a página for carregada
+        window.onload = function() {
+            atualizarContador();
+            // Atualizar a cada 24 horas
+            setInterval(atualizarContador, 86400000);
+        };
+    </script>
+</body>
+</html>
